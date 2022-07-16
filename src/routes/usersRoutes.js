@@ -1,24 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({ message: "All users" });
-});
+const usersControllers = require("../controllers/usersControllers");
 
-router.get("/:id", (req, res) => {
-  res.json({ message: `User with id ${req.params.id}` });
-});
+router.get("/", usersControllers.findAll);
 
-router.post("/", (req, res) => {
-  res.json({ message: `User created successfully` });
-});
+router.get("/:id", usersControllers.findOne);
 
-router.put("/:id", (req, res) => {
-  res.json({ message: `User with id ${req.params.id} updated successfully` });
-});
+router.post("/", usersControllers.create);
 
-router.delete("/:id", (req, res) => {
-  res.json({ message: `User with id ${req.params.id} deleted successfully` });
-});
+router.put("/:id", usersControllers.update);
+
+router.delete("/:id", usersControllers.remove);
 
 module.exports = router;
